@@ -1,6 +1,5 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:super_quest/actors/ember.dart';
 
 import '../ember_quest.dart';
 
@@ -8,7 +7,7 @@ class PlatformBlock extends SpriteComponent
     with HasGameRef<EmberQuestGame> {
   final Vector2 gridPosition;
   double xOffset;
-  
+
   double objectSpeed = 0.0;
   final Vector2 velocity = Vector2.zero();
 

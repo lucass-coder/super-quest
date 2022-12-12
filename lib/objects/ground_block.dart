@@ -1,6 +1,5 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:super_quest/actors/ember.dart';
 
 import '../ember_quest.dart';
 

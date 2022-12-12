@@ -1,3 +1,4 @@
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:super_quest/actors/ember.dart';
 import 'package:super_quest/actors/water_enemy.dart';
@@ -7,12 +8,14 @@ import 'package:super_quest/objects/platform_block.dart';
 import 'package:super_quest/objects/star.dart';
 import 'package:flutter/material.dart';
 
-class EmberQuestGame extends FlameGame {
+class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
   EmberQuestGame();
 
   late EmberPlayer _ember;
   double objectSpeed = 0.0;
   final Vector2 velocity = Vector2.zero();
+  int starsCollected = 0;
+  int health = 3;
 
 
   @override
@@ -27,6 +30,10 @@ class EmberQuestGame extends FlameGame {
       'water_enemy.png',
     ]);
     initializeGame();
+    // Faz o Ember iniciar caindo
+    _ember = EmberPlayer(
+      position: Vector2(128, canvasSize.y - 128),
+    );
     // _ember = EmberPlayer(
     //   position: Vector2(128, canvasSize.y - 70),
     // );
@@ -39,6 +46,10 @@ class EmberQuestGame extends FlameGame {
     for (final block in segments[segmentIndex]) {
       switch (block.blockType) {
         case GroundBlock:
+          add(GroundBlock(
+            gridPosition: block.gridPosition,
+            xOffset: xPositionOffset,
+          ));
           break;
         case PlatformBlock:
           add(PlatformBlock(

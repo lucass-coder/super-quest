@@ -10,7 +10,6 @@ class GroundBlock extends SpriteComponent
   final Vector2 gridPosition;
   double xOffset;
 
-  late EmberPlayer _ember;
   double objectSpeed = 0.0;
   final Vector2 velocity = Vector2.zero();
 
@@ -34,6 +33,11 @@ class GroundBlock extends SpriteComponent
     velocity.x = game.objectSpeed;
     position += velocity * dt;
     if (position.x < -size.x) removeFromParent();
+
+    if (game.health <= 0) {
+      removeFromParent();
+    }
+
     super.update(dt);
   }
 }

@@ -7,6 +7,7 @@ import 'package:super_quest/objects/ground_block.dart';
 import 'package:super_quest/objects/platform_block.dart';
 import 'package:super_quest/objects/star.dart';
 import 'package:flutter/material.dart';
+import 'package:super_quest/overlays/hud.dart';
 
 class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
   EmberQuestGame();
@@ -29,15 +30,16 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
       'star.png',
       'water_enemy.png',
     ]);
-    initializeGame();
+    initializeGame(true);
     // Faz o Ember iniciar caindo
     _ember = EmberPlayer(
-      position: Vector2(128, canvasSize.y - 128),
+      position: Vector2(28, canvasSize.y - 128),
     );
     // _ember = EmberPlayer(
     //   position: Vector2(128, canvasSize.y - 70),
     // );
     // add(_ember);
+    add(Hud());
   }
 
 
@@ -73,7 +75,7 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
     }
   }
 
-  void initializeGame() {
+  void initializeGame(bool loadHud) {
     // Assume that size.x < 3200
     final segmentsToLoad = (size.x / 640).ceil();
     segmentsToLoad.clamp(0, segments.length);
@@ -83,9 +85,12 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
     }
 
     _ember = EmberPlayer(
-      position: Vector2(128, canvasSize.y - 70),
+      position: Vector2(128, canvasSize.y - 128),
     );
     add(_ember);
+    if (loadHud) {
+      add(Hud());
+    }
   }
 
   @override
@@ -100,5 +105,18 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
 
 
 
+  void reset() {
+    starsCollected = 0;
+    health = 3;
+    initializeGame(false);
+  }
+
+  @override
+  void update(double dt) {
+    if (health <= 0) {
+      overlays.add('GameOver');
+    }
+    super.update(dt);
+  }
 
 }

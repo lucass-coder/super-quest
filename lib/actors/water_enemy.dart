@@ -33,7 +33,7 @@ class WaterEnemy extends SpriteAnimationComponent
     add(RectangleHitbox()..collisionType = CollisionType.active);
     add(
       MoveEffect.by(
-        Vector2(-3 * size.x, 0),
+        Vector2(-2.8 * size.x, 0),
         EffectController(
           duration: 3,
           alternate: true,
@@ -48,6 +48,11 @@ class WaterEnemy extends SpriteAnimationComponent
     velocity.x = game.objectSpeed;
     position += velocity * dt;
     if (position.x < -size.x) removeFromParent();
+
+    if (position.x < -size.x || game.health <= 0) {
+      removeFromParent();
+    }
+
     super.update(dt);
   }
 }

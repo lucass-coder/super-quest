@@ -98,6 +98,14 @@ class EmberPlayer extends SpriteAnimationComponent
       game.objectSpeed = -moveSpeed;
     }
 
+    if (position.y > game.size.y + size.y) {
+      game.health = 0;
+    }
+
+    if (game.health <= 0) {
+      removeFromParent();
+    }
+
     super.update(dt);
   }
 
@@ -134,11 +142,17 @@ class EmberPlayer extends SpriteAnimationComponent
       hit();
     }
 
+    if (other is Star) {
+      other.removeFromParent();
+      game.starsCollected++;
+    }
+
     super.onCollision(intersectionPoints, other);
   }
 
   void hit() {
     if (!hitByEnemy) {
+      game.health--;
       hitByEnemy = true;
     }
     add(
@@ -146,7 +160,7 @@ class EmberPlayer extends SpriteAnimationComponent
         EffectController(
           alternate: true,
           duration: 0.1,
-          repeatCount: 6,
+          repeatCount: 5,
         ),
       )..onComplete = () {
         hitByEnemy = false;

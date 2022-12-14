@@ -11,7 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.5.0
+  flame_audio: ^1.3.3
 
 flutter:
   assets:
     - assets/images/
+    - assets/music/
+    - assets/audio/fundo.mp3

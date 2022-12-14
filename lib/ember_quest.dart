@@ -1,5 +1,6 @@
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/audio_pool.dart';
 import 'package:super_quest/actors/ember.dart';
 import 'package:super_quest/actors/water_enemy.dart';
 import 'package:super_quest/managers/segment_manager.dart';
@@ -8,6 +9,7 @@ import 'package:super_quest/objects/platform_block.dart';
 import 'package:super_quest/objects/star.dart';
 import 'package:flutter/material.dart';
 import 'package:super_quest/overlays/hud.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
   EmberQuestGame();
@@ -17,7 +19,9 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
   final Vector2 velocity = Vector2.zero();
   int starsCollected = 0;
   int health = 3;
-
+  late double lastBlockXPosition = 0.0;
+  late UniqueKey lastBlockKey;
+  late AudioPool pool;
 
   @override
   Future<void> onLoad() async {
@@ -30,16 +34,16 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
       'star.png',
       'water_enemy.png',
     ]);
+    // FlameAudio.bgm.initialize();
+    await FlameAudio.audioCache.load('fundo.mp3');
+    startBgmMusic();
     initializeGame(true);
     // Faz o Ember iniciar caindo
     _ember = EmberPlayer(
       position: Vector2(28, canvasSize.y - 128),
     );
-    // _ember = EmberPlayer(
-    //   position: Vector2(128, canvasSize.y - 70),
-    // );
-    // add(_ember);
     add(Hud());
+
   }
 
 
@@ -118,5 +122,12 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
     }
     super.update(dt);
   }
+  void startBgmMusic() {
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('fundo.mp3');
+    //  pool.start();
+  }
+
 
 }
+

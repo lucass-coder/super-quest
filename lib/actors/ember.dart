@@ -63,6 +63,8 @@ class EmberPlayer extends SpriteAnimationComponent
     hasJumped = (keysPressed.contains(LogicalKeyboardKey.space) ||
         keysPressed.contains(LogicalKeyboardKey.arrowUp)
     );
+
+
     return true;
   }
 
@@ -85,19 +87,47 @@ class EmberPlayer extends SpriteAnimationComponent
 
     // Determine if ember has jumped.
     if (hasJumped) {
-      avatar = 'ember.png';
+      avatar = 'lucas-pulo.png';
+      animation = SpriteAnimation.fromFrameData(
+        game.images.fromCache(avatar),
+        SpriteAnimationData.sequenced(
+          amount: 1,
+          textureSize: Vector2(120,420),
+          stepTime: 0.12,
+        ),
+      );
       if (isOnGround) {
+        print('IS GROMP');
         velocity.y = -jumpSpeed;
         isOnGround = false;
       }
+      print('NÃÃÃÃO IS GROMP');
       hasJumped = false;
     }
 
     // Prevent ember from jumping to crazy fast.
     velocity.y = velocity.y.clamp(-jumpSpeed, terminalVelocity);
 
+    // TOPO do PULO
+    if(velocity.y == 0){
+      print('Velocidade igual a zero');
+      avatar = 'lucas-desce.png';
+      animation = SpriteAnimation.fromFrameData(
+        game.images.fromCache(avatar),
+        SpriteAnimationData.sequenced(
+          amount: 1,
+          textureSize: Vector2(120,420),
+          stepTime: 0.12,
+        ),
+      );
+    }
+
+
     // Adjust ember position.
     position += velocity * dt;
+
+
+    // print('LINHA 126: ${velocity.x}');
 
     // If ember fell in pit, then game over.
     if (position.y > game.size.y + size.y) {
@@ -133,7 +163,20 @@ class EmberPlayer extends SpriteAnimationComponent
 
         // If collision normal is almost upwards,
         // ember must be on ground.
+        // Detecta Boneco no chão
         if (fromAbove.dot(collisionNormal) > 0.9) {
+
+            avatar = 'lucas.png';
+            animation = SpriteAnimation.fromFrameData(
+              game.images.fromCache(avatar),
+              SpriteAnimationData.sequenced(
+                amount: 1,
+                textureSize: Vector2(120,420),
+                stepTime: 0.12,
+              ),
+            );
+
+
           isOnGround = true;
         }
 

@@ -37,6 +37,8 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
       'hero.png',
       'skater.png',
       'lucas.png',
+      'lucas-pulo.png',
+      'lucas-desce.png',
     ]);
     // FlameAudio.bgm.initialize();
 

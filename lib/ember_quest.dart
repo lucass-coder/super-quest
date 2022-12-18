@@ -1,6 +1,7 @@
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/audio_pool.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:super_quest/actors/ember.dart';
 import 'package:super_quest/actors/water_enemy.dart';
 import 'package:super_quest/managers/segment_manager.dart';
@@ -33,9 +34,16 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
       'heart.png',
       'star.png',
       'water_enemy.png',
+      'hero.png',
+      'skater.png',
+      'lucas.png',
     ]);
     // FlameAudio.bgm.initialize();
+
     await FlameAudio.audioCache.load('fundo.mp3');
+
+    // var home_map = await TiledComponent.load('back.png', Vector2.all(32));
+    // add(home_map);
     startBgmMusic();
     initializeGame(true);
     // Faz o Ember iniciar caindo
@@ -124,7 +132,7 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
   }
   void startBgmMusic() {
     FlameAudio.bgm.initialize();
-    FlameAudio.bgm.play('fundo.mp3');
+    // FlameAudio.bgm.play('fundo.mp3', volume: 0.2);
     //  pool.start();
   }
 

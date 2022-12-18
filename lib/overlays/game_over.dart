@@ -48,7 +48,7 @@ class GameOver extends StatelessWidget {
                     backgroundColor: whiteTextColor,
                   ),
                   child: const Text(
-                    'Play Again',
+                    'Jogar Outra',
                     style: TextStyle(
                       fontSize: 28.0,
                       color: blackTextColor,

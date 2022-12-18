@@ -13,7 +13,11 @@ class EmberPlayer extends SpriteAnimationComponent
     with KeyboardHandler, CollisionCallbacks, HasGameRef<EmberQuestGame> {
   EmberPlayer({
     required super.position,
-  }) : super(size: Vector2.all(64), anchor: Anchor.center);
+  }) : super(
+      size: Vector2(70
+          ,150),
+      anchor: Anchor.center,
+  );
 
   final Vector2 velocity = Vector2.zero();
   final Vector2 fromAbove = Vector2(0, -1);
@@ -22,6 +26,7 @@ class EmberPlayer extends SpriteAnimationComponent
   final double moveSpeed = 200;
   final double terminalVelocity = 150;
   int horizontalDirection = 0;
+  String avatar = 'lucas.png';
 
   bool hasJumped = false;
   bool hitByEnemy = false;
@@ -30,10 +35,10 @@ class EmberPlayer extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     animation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('ember.png'),
+      game.images.fromCache(avatar),
       SpriteAnimationData.sequenced(
-        amount: 4,
-        textureSize: Vector2.all(16),
+        amount: 1,
+        textureSize: Vector2(120,420),
         stepTime: 0.12,
       ),
     );
@@ -55,7 +60,9 @@ class EmberPlayer extends SpriteAnimationComponent
         ? 1
         : 0;
 
-    hasJumped = keysPressed.contains(LogicalKeyboardKey.arrowUp);
+    hasJumped = (keysPressed.contains(LogicalKeyboardKey.space) ||
+        keysPressed.contains(LogicalKeyboardKey.arrowUp)
+    );
     return true;
   }
 
@@ -78,6 +85,7 @@ class EmberPlayer extends SpriteAnimationComponent
 
     // Determine if ember has jumped.
     if (hasJumped) {
+      avatar = 'ember.png';
       if (isOnGround) {
         velocity.y = -jumpSpeed;
         isOnGround = false;
@@ -106,6 +114,7 @@ class EmberPlayer extends SpriteAnimationComponent
     } else if (horizontalDirection > 0 && scale.x < 0) {
       flipHorizontally();
     }
+
     super.update(dt);
   }
 
@@ -163,8 +172,8 @@ class EmberPlayer extends SpriteAnimationComponent
           repeatCount: 5,
         ),
       )..onComplete = () {
-        hitByEnemy = false;
-      },
+          hitByEnemy = false;
+        },
     );
   }
 }

@@ -8,12 +8,13 @@ import 'ember_quest.dart';
 void main() {
   runApp(
     GameWidget<EmberQuestGame>.controlled(
+      // initialActiveOverlays: const ['MainMenu'],
       gameFactory: EmberQuestGame.new,
       overlayBuilderMap: {
-        'MainMenu': (_, game) => MainMenu(game: game),
-        'GameOver': (_, game) => GameOver(game: game),
+        // 'MainMenu': (_, game) => MainMenu(game: game),
+         'GameOver': (_, game) => GameOver(game: game),
       },
-      initialActiveOverlays: const ['MainMenu'],
+      // initialActiveOverlays: const ['MainMenu'],
     ),
   );
 }

@@ -30,7 +30,7 @@ class MainMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Ember Quest',
+                'Super Quest',
                 style: TextStyle(
                   color: whiteTextColor,
                   fontSize: 24,
@@ -48,7 +48,7 @@ class MainMenu extends StatelessWidget {
                     backgroundColor: whiteTextColor,
                   ),
                   child: const Text(
-                    'Play',
+                    'Jogar',
                     style: TextStyle(
                       fontSize: 40.0,
                       color: blackTextColor,
@@ -58,14 +58,11 @@ class MainMenu extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                '''
-                Use WASD or Arrow Keys for movement.  Space bar to jump.
-                Collect as many stars as you can and avoid enemies!
-                ''',
+                'Use  <- ->  para se mover. \n Barra de Espaço para Pular. \nBom divertimento!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: whiteTextColor,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
             ],

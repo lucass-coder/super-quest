@@ -1,9 +1,7 @@
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/audio_pool.dart';
-import 'package:flame_tiled/flame_tiled.dart';
 import 'package:super_quest/actors/ember.dart';
-import 'package:super_quest/actors/lucas.dart';
 import 'package:super_quest/actors/water_enemy.dart';
 import 'package:super_quest/managers/segment_manager.dart';
 import 'package:super_quest/objects/ground_block.dart';

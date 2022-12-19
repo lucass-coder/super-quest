@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:super_quest/routes.dart';
-import 'package:super_quest/widgets/button_item.dart';
 import 'package:super_quest/widgets/selection_person_area.dart';
 
 class LessonMenu extends StatefulWidget {

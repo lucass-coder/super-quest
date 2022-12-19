@@ -3,6 +3,7 @@ import 'package:flame/game.dart';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:super_quest/actors/ember.dart';
+import 'package:super_quest/actors/lucas.dart';
 import 'package:super_quest/actors/water_enemy.dart';
 import 'package:super_quest/managers/segment_manager.dart';
 import 'package:super_quest/objects/ground_block.dart';
@@ -44,14 +45,14 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
 
     await FlameAudio.audioCache.load('fundo.mp3');
 
-    // var home_map = await TiledComponent.load('back.png', Vector2.all(32));
-    // add(home_map);
     startBgmMusic();
     initializeGame(true);
+
     // Faz o Ember iniciar caindo
     _ember = EmberPlayer(
       position: Vector2(28, canvasSize.y - 128),
     );
+
     add(Hud());
 
   }
@@ -102,6 +103,7 @@ class EmberQuestGame extends FlameGame with HasCollisionDetection, HasKeyboardHa
       position: Vector2(128, canvasSize.y - 128),
     );
     add(_ember);
+
     if (loadHud) {
       add(Hud());
     }

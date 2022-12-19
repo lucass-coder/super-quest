@@ -1,20 +1,23 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:super_quest/overlays/game_over.dart';
-import 'package:super_quest/overlays/main_menu.dart';
+import 'package:super_quest/routes.dart';
 
-import 'ember_quest.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   runApp(
-    GameWidget<EmberQuestGame>.controlled(
-      // initialActiveOverlays: const ['MainMenu'],
-      gameFactory: EmberQuestGame.new,
-      overlayBuilderMap: {
-        // 'MainMenu': (_, game) => MainMenu(game: game),
-         'GameOver': (_, game) => GameOver(game: game),
-      },
-      // initialActiveOverlays: const ['MainMenu'],
+    MaterialApp(
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: Routes.routes,
     ),
+    // GameWidget<EmberQuestGame>.controlled(
+    //   gameFactory: EmberQuestGame.new,
+    //   overlayBuilderMap: {
+    //      'MainMenu': (_, game) => MainMenu(game: game),
+    //      'GameOver': (_, game) => GameOver(game: game),
+    //   },
+    //    initialActiveOverlays: const ['MainMenu'],
+    // ),
   );
 }
